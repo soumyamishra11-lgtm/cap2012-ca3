@@ -1,0 +1,35 @@
+#include <queue>
+using namespace std;
+
+class MyStack {
+private:
+    queue<int> numbers;
+
+public:
+    MyStack() {
+    }
+
+    void push(int x) {
+        numbers.push(x);
+        int size = numbers.size();
+
+        for (int i = 0; i < size - 1; i++) {
+            numbers.push(numbers.front());
+            numbers.pop();
+        }
+    }
+
+    int pop() {
+        int topNumber = numbers.front();
+        numbers.pop();
+        return topNumber;
+    }
+
+    int top() {
+        return numbers.front();
+    }
+
+    bool empty() {
+        return numbers.empty();
+    }
+};
