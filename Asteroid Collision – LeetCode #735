@@ -1,0 +1,38 @@
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int> survivors;
+
+        for (int i = 0; i < asteroids.size(); i++) {
+            int asteroid = asteroids[i];
+            bool destroyed = false;
+
+            while (!survivors.empty() &&
+                   survivors.back() > 0 &&
+                   asteroid < 0) {
+
+                if (survivors.back() < -asteroid) {
+                    survivors.pop_back();
+                } 
+                else if (survivors.back() == -asteroid) {
+                    survivors.pop_back();
+                    destroyed = true;
+                    break;
+                } 
+                else {
+                    destroyed = true;
+                    break;
+                }
+            }
+
+            if (!destroyed) {
+                survivors.push_back(asteroid);
+            }
+        }
+
+        return survivors;
+    }
+};
